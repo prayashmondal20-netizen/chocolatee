@@ -1,233 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Pratyusha ❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Hind+Siliguri:wght@500;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For My Pukkii ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --soft-pink: #ffdae0; --deep-rose: #ff4d6d; --glass: rgba(255, 255, 255, 0.9); }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            margin: 0; font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffdae0 100%);
+            height: 100vh; display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+        }
 
-<style>
-    *{ margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-    body {
-        min-height:100vh;
-        background:linear-gradient(135deg,#ffe4ec,#ffd1dc);
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        overflow:hidden;
-        transition: background 1.5s ease-in-out;
-    }
+        .glass-card {
+            background: var(--glass); backdrop-filter: blur(10px);
+            padding: 25px; border-radius: 30px; text-align: center;
+            width: 90%; max-width: 360px; z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.15);
+            position: relative; overflow: hidden;
+        }
 
-    .page {
-        display:none;
-        width:100%;
-        height:100vh;
-        justify-content:center;
-        align-items:center;
-        padding: 20px;
-        position: absolute;
-    }
-    .page.show { display:flex !important; }
+        .slide { display: none; opacity: 0; transition: opacity 0.4s ease-in-out; }
+        .active { display: block; opacity: 1; }
 
-    .card {
-        width:95%;
-        max-width:440px;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius:25px;
-        padding: 20px;
-        text-align:center;
-        box-shadow:0 15px 40px rgba(255,0,90,.15);
-        z-index: 10;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
+        h2 { font-family: 'Dancing Script', cursive; color: var(--deep-rose); font-size: 1.7rem; margin: 10px 0; }
+        p { color: #7d5a5a; font-size: 0.85rem; line-height: 1.5; }
 
-    .letter-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .translate-btn { padding: 8px 15px; font-size: 13px; font-weight: 600; background: #ff4d6d; color: #fff; border-radius: 20px; border: none; cursor: pointer; }
+        /* Puzzle */
+        #puzzle-board {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 10px; margin: 15px auto; width: 220px; height: 220px;
+        }
+        .tile {
+            width: 105px; height: 105px; background-size: 210px 210px;
+            border-radius: 15px; border: 3px solid white; transition: transform 0.2s;
+        }
+        .selected { border-color: var(--deep-rose); transform: scale(0.95); }
 
-    .letter-content { text-align: left; line-height: 1.6; color: #333; font-size: 14px; white-space: pre-wrap; margin-top: 5px; }
-    
-    #en { display: block; }
-    #bn { display: none; font-family: 'Hind Siliguri', sans-serif; font-size: 18px; line-height: 1.7; }
-    
-    .signature { font-family: 'Great Vibes', cursive; font-size: 28px; color: #ff4d6d; text-align: right; margin-top: 10px; }
+        /* Buttons */
+        button {
+            padding: 14px; border: none; border-radius: 20px;
+            background: var(--deep-rose); color: white; width: 100%;
+            font-weight: 600; margin-top: 10px; font-size: 0.95rem;
+            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.2);
+            transition: 0.3s ease; cursor: pointer;
+        }
+        .btn-small { width: 46%; font-size: 0.85rem; padding: 12px 5px; }
+        .next-btn { background: #5a5a5a !important; display: none; }
 
-    .collage-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 15px 0; }
-    .polaroid { background: white; padding: 5px 5px 10px 5px; box-shadow: 0 5px 10px rgba(0,0,0,0.1); transition: 0.3s; }
-    .polaroid img { width: 100%; height: 110px; object-fit: cover; border: 1px solid #eee; }
-    .caption { font-family: 'Dancing Script', cursive; font-size: 12px; color: #ff4d6d; margin-top: 5px; }
+        /* Final Scrollable Letter */
+        #final-letter { max-height: 70vh; overflow-y: auto; text-align: left; padding: 5px; }
 
-    #final.show { background: #0b0101 !important; width: 100vw; height: 100vh; display: flex; flex-direction: column; }
-    .rose-final { font-size: 100px; animation: pulse 2.5s infinite; filter: drop-shadow(0 0 15px #ff4d6d); }
-    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-    .final-text { font-size: 2.5rem; margin-top: 20px; color: #ff4d6d; font-family: 'Georgia', serif; background: linear-gradient(45deg, #ff4d6d, #ffb703); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-    input { width: 100%; padding: 12px; border-radius: 20px; border: 2px solid #ffd1dc; margin-top: 10px; text-align: center; outline: none; }
-    .btn { margin-top:15px; padding: 12px 30px; border: none; border-radius: 30px; font-weight: 600; cursor: pointer; background: #ff4d6d; color: #fff; }
-    .petal { position: fixed; top: -10%; user-select: none; pointer-events: none; z-index: 100; animation: fall linear forwards; }
-    @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-</style>
+        .flower { position: fixed; top: -10%; font-size: 24px; animation: fall linear forwards; z-index: 5; pointer-events: none; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .pulse { animation: heartbeat 1.5s infinite; }
+    </style>
 </head>
 <body>
 
-<div class="page show" id="lock">
-    <div class="card">
-        <h2 style="color:#ff4d6d; font-family:'Dancing Script'; font-size:30px;">🔐 Secret Lock</h2>
-        <input id="passInput" type="password" placeholder="Enter Password">
-        <button class="btn" onclick="checkUnlock()">Unlock 💖</button>
-    </div>
-</div>
+    <div class="glass-card" id="mainCard">
+        <canvas id="guideCanvas" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:15;"></canvas>
 
-<div class="page" id="namePage">
-    <div class="card">
-        <h2 style="color:#ff4d6d; font-family:'Dancing Script'; font-size:30px;">For Who? 💕</h2>
-        <input id="userNameInput" type="text" placeholder="Enter her name...">
-        <button class="btn" onclick="saveAndGo()">Open My Heart ➜</button>
-    </div>
-</div>
-
-<div class="page" id="letterPage">
-    <div class="card">
-        <div class="letter-header">
-            <h2 id="ltitle" style="font-family:'Dancing Script'; color:#ff4d6d;">My Love,</h2>
-            <button onclick="toggleLang()" class="translate-btn" id="tbtn">Translate to বাংলা</button>
+        <div id="slide1" class="slide active">
+            <h2>Hush... ❤️</h2>
+            <p>A secret awaits you, Pratyusha.</p>
+            <input type="number" id="passInput" pattern="\d*" inputmode="numeric" placeholder="Enter Code" style="padding:15px; border-radius:20px; border:2px solid #ffccd5; width:100%; text-align:center; font-size:1.2rem; margin-bottom:10px;">
+            <button onclick="checkPass()">Unlock Love</button>
         </div>
-        <div class="letter-content">
-<div id="en">Happy Rose Day,
-My Pratyusha 🌹..
 
-If I could, I’d give you a rose that never fades --> just like my feelings for you. Every petal, Every Pigment would carry a reason why you mean so much to me.
-
-Firstly I gave You A Pink Rose which means 🌸🌹:
-Gentle love, Sweetness, Admiration, Happiness.
-""I like you deeply, I care for you, and you make me happy.""
-
-Keeping Like A Rose.. Is My Way Of Showing Love. The Way Rose needs Care and Warmth.. Although It has Thorns.. I promise I will keep you like a Rose.
-
-Thank you for being my wife and the mother of my kids. Thank you for everything ❤️
-<div class="signature">— Prayash..</div></div>
-
-<div id="bn">শুভ রোজ ডে, আমার প্রত্যুষা 🌹..
-
-আমি যদি পারতাম, তোমাকে এমন এক গোলাপ দিতাম যা কোনোদিন শুকিয়ে যাবে না। প্রতিটি পাঁপড়ি আর রঙ বলে দিত তুমি আমার কাছে কতটা দামী।
-
-গোলাপী গোলাপের অর্থ 🌸🌹: কোমল ভালোবাসা, স্নেহ ও যত্ন এবং অপার সুখ। এক কথায়— ""আমি তোমাকে গভীরভাবে পছন্দ করি এবং তুমি আমাকে সুখী করো।""
-
-গোলাপের মতো আগলে রাখাই আমার ভালোবাসার ধরন। আমি কথা দিচ্ছি, আমি তোমাকে একটি গোলাপের মতোই আগলে রাখবো।
-
-আমার স্ত্রী এবং আমার সন্তানদের মা হওয়ার জন্য— সবকিছুর জন্য তোমাকে ধন্যবাদ ❤️
-<div class="signature">— প্রয়াশ..</div></div>
+        <div id="slide2" class="slide">
+            <h2>Luckiest Person?</h2>
+            <button id="btnA" onclick="drawGuideLine('btnA')">A) Me ✨</button>
+            <button id="btnB" onclick="drawGuideLine('btnB')">B) You ✨</button>
+            <button id="btnC" onclick="triggerOptionC()" style="background: #ff758c;">C) Both Of Us ✨</button>
+            <button id="next2" class="next-btn" onclick="nextSlide(3)">Continue ➡️</button>
         </div>
-        <button class="btn" onclick="navTo('collagePage')">See Our Memories ➜</button>
-    </div>
-</div>
 
-<div class="page" id="collagePage">
-    <div class="card">
-        <h2 style="font-family:'Dancing Script'; color:#ff4d6d;">Our Memories ✨</h2>
-        <div class="collage-grid">
-            <div class="polaroid" style="transform:rotate(-3deg)"><img src="https://i.ibb.co/Qv3140Hc/image.jpg"><p class="caption">Best Day</p></div>
-            <div class="polaroid" style="transform:rotate(2deg)"><img src="https://i.ibb.co/pvxgWQGg/image.jpg"><p class="caption">Joy</p></div>
-            <div class="polaroid" style="transform:rotate(-2deg)"><img src="https://i.ibb.co/Fkr71DHX/image.jpg"><p class="caption">Favorite</p></div>
-            <div class="polaroid" style="transform:rotate(3deg)"><img src="https://i.ibb.co/gZBnGkK4/image.jpg"><p class="caption">Forever</p></div>
+        <div id="slide3" class="slide">
+            <h2 id="puzz-head">Fix Our Memory 🧩</h2>
+            <div id="puzzle-board"></div>
+            <div id="message-area" style="display:none;">
+                <p style="color: var(--deep-rose); font-weight: 600; margin-bottom:5px;">Today Is Propose Day ❤️🌸</p>
+                <div style="font-size: 0.8rem; line-height: 1.4;">
+                    Kuch kehena tha tumse... Tum sunna chahogi kya?<br><br>
+                    Zindegi ek chota sa safar ha... Tum mere sath chalna chahogi kya?<br><br>
+                    Aur jab mujhe neend na ayee... Tum mujhe apni gaud me sulaayogi kya?<br><br>
+                    Waise to mene chand ko samne se nehi dekha... tum mere chand banna chahogii kya?.....<br>🫶🏻🫶🏻🧿..
+                </div>
+                <button onclick="nextSlide(4)" style="background:#5a5a5a;">Continue ❤️</button>
+            </div>
         </div>
-        <button class="btn" onclick="navTo('askPage')">One More Thing... 🌹</button>
-    </div>
-</div>
 
-<div class="page" id="askPage">
-    <div class="card">
-        <div style="font-size:60px;">🌹</div>
-        <h2 style="font-family:'Dancing Script'; color:#ff4d6d;">For You, <span id="displayName"></span></h2>
-        <p>Will you accept this rose and be mine forever?</p>
-        <div style="display:flex; gap:10px; justify-content:center;">
-            <button class="btn" onclick="triggerFinal()">YES 😘</button>
-            <button id="noBtn" class="btn" onmouseover="dodgeNo()" style="background:#ffd1dc; color:#ff4d6d;">NO</button>
+        <div id="slide4" class="slide">
+            <h2 style="font-size: 1.3rem;">"Will you hold my hand today and always, and be my forever?" 💍❤️</h2>
+            <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                <button class="btn-small pulse" onclick="finalYes()">YES 🧿</button>
+                <button id="noBtn" class="btn-small" style="background:#8e9aaf;" onmouseover="moveNo()" onclick="moveNo()">NO 🥺</button>
+            </div>
+        </div>
+
+        <div id="slide5" class="slide">
+            <div id="final-letter">
+                <h2 style="text-align: center; font-size: 1.8rem;">I Love You Pratyusha ❤️</h2>
+                <p style="text-align: center; font-style: italic; margin-top: -8px;">(My Pukkii / My Wifeee)</p>
+                <hr style="border: 0; border-top: 1px solid #ffccd5; margin: 10px 0;">
+                <p><b>I don’t promise a perfect life, but I promise a real one --> full of care, respect, and endless love..</b></p>
+                <p>I love U Every second, Every Minute, Every hour, Every day, Every Night, Every Month, Every Year And Upcoming Year, Every Season... 🧿</p>
+                <p style="text-align: center; font-size: 1.1rem; margin:10px 0;">❤️❤️🧿🫶🏻🧿❤️❤️</p>
+                <h2 style="text-align: center; font-size: 1.1rem; color: #e63946;">Our Forever Starts Now! ♾️</h2>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="page" id="final">
-    <div style="text-align:center; z-index:10;">
-        <div class="rose-final">🌹</div>
-        <h1 class="final-text">Happy Rose Day</h1>
-        <p style="color:white; margin-top:10px;">To My Pratyusha, Forever Yours ❤️</p>
-    </div>
-</div>
+    <script>
+        const imgUrl = "https://i.ibb.co/XktqPRdJ/image.jpg";
+        let tiles = [0, 1, 2, 3], shuffled = [1, 0, 3, 2], selectedIndex = null;
 
-<script>
-    function navTo(id) {
-        const pages = document.getElementsByClassName('page');
-        for (let i = 0; i < pages.length; i++) {
-            pages[i].classList.remove('show');
+        function checkPass() {
+            if(document.getElementById('passInput').value === "120805") nextSlide(2);
+            else alert("Enter our special date... ❤️");
         }
-        document.getElementById(id).classList.add('show');
-    }
 
-    function checkUnlock() {
-        const p = document.getElementById('passInput').value;
-        if(p === "120805") { 
-            navTo('namePage'); 
-        } else { 
-            alert("Incorrect Password! 😝"); 
+        function nextSlide(n) {
+            clearCanvas();
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(s => s.classList.remove('active'));
+            setTimeout(() => {
+                slides.forEach(s => s.style.display = 'none');
+                const next = document.getElementById('slide' + n);
+                next.style.display = 'block';
+                setTimeout(() => next.classList.add('active'), 50);
+            }, 100);
+            if(n === 3) initPuzzle();
         }
-    }
 
-    function saveAndGo() {
-        const n = document.getElementById('userNameInput').value;
-        if(n.trim() === "") { 
-            alert("Please tell me your name!"); 
-            return; 
+        function clearCanvas() {
+            const canvas = document.getElementById('guideCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
-        document.getElementById('displayName').innerText = n;
-        navTo('letterPage');
-    }
 
-    let isBengaliMode = false;
-    function toggleLang() {
-        isBengaliMode = !isBengaliMode;
-        if (isBengaliMode) {
-            document.getElementById('en').style.display = 'none';
-            document.getElementById('bn').style.display = 'block';
-            document.getElementById('tbtn').innerText = "English";
-            document.getElementById('ltitle').innerText = "আমার ভালোবাসা,";
-        } else {
-            document.getElementById('en').style.display = 'block';
-            document.getElementById('bn').style.display = 'none';
-            document.getElementById('tbtn').innerText = "Translate to বাংলা";
-            document.getElementById('ltitle').innerText = "My Love,";
+        function drawGuideLine(fromBtnId) {
+            const canvas = document.getElementById('guideCanvas');
+            const card = document.getElementById('mainCard').getBoundingClientRect();
+            canvas.width = card.width; canvas.height = card.height;
+            const ctx = canvas.getContext('2d');
+            const start = document.getElementById(fromBtnId).getBoundingClientRect();
+            const end = document.getElementById('btnC').getBoundingClientRect();
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = "#ff4d6d"; ctx.setLineDash([5, 5]); ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(start.left - card.left + (start.width/2), start.bottom - card.top);
+            ctx.quadraticCurveTo(card.width, (start.bottom + end.top)/2 - card.top, end.left - card.left + (end.width/2), end.top - card.top);
+            ctx.stroke();
         }
-    }
 
-    function dodgeNo() {
-        const b = document.getElementById('noBtn');
-        b.style.position = 'fixed';
-        b.style.left = Math.random() * (window.innerWidth - 80) + 'px';
-        b.style.top = Math.random() * (window.innerHeight - 40) + 'px';
-    }
+        function triggerOptionC() {
+            startFlowerRain();
+            document.getElementById('next2').style.display = 'block';
+        }
 
-    function triggerFinal() {
-        document.body.style.background = "#0b0101";
-        navTo('final');
-        setInterval(() => spawnPetal('🌸'), 300);
-    }
+        function startFlowerRain() {
+            for(let i=0; i<25; i++) {
+                setTimeout(() => {
+                    const f = document.createElement('div');
+                    f.className = 'flower'; f.innerHTML = '🌸';
+                    f.style.left = Math.random() * 100 + 'vw';
+                    f.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    document.body.appendChild(f);
+                }, i * 150);
+            }
+        }
 
-    function spawnPetal(emoji) {
-        const p = document.createElement('div');
-        p.className = 'petal';
-        p.innerHTML = emoji;
-        p.style.left = Math.random() * 100 + 'vw';
-        p.style.fontSize = (Math.random() * 20 + 10) + 'px';
-        p.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 5000);
-    }
+        function initPuzzle() {
+            const board = document.getElementById('puzzle-board');
+            board.innerHTML = '';
+            shuffled.forEach((tileNum, i) => {
+                const div = document.createElement('div');
+                div.className = 'tile';
+                div.style.backgroundImage = `url(${imgUrl})`;
+                div.style.backgroundPosition = `${(tileNum % 2) * -105}px ${Math.floor(tileNum / 2) * -105}px`;
+                div.onclick = () => handleTileClick(i);
+                board.appendChild(div);
+            });
+        }
 
-    setInterval(() => {
-        if(document.getElementById('final').classList.contains('show')) return;
-        spawnPetal(Math.random() > 0.5 ? '🌹' : '❤️');
-    }, 400);
-</script>
+        function handleTileClick(i) {
+            const allTiles = document.querySelectorAll('.tile');
+            if (selectedIndex === null) {
+                selectedIndex = i;
+                allTiles[i].classList.add('selected');
+            } else {
+                [shuffled[selectedIndex], shuffled[i]] = [shuffled[i], shuffled[selectedIndex]];
+                selectedIndex = null;
+                initPuzzle();
+                if (JSON.stringify(tiles) === JSON.stringify(shuffled)) {
+                    document.getElementById('puzzle-board').style.display = 'none';
+                    document.getElementById('puzz-head').innerText = "Unlocked for You... ✨";
+                    setTimeout(() => {
+                        document.getElementById('puzz-head').style.display = 'none';
+                        document.getElementById('message-area').style.display = 'block';
+                        startFlowerRain();
+                    }, 1000);
+                }
+            }
+        }
+
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            btn.style.position = 'fixed';
+            btn.style.left = Math.random() * (window.innerWidth - 80) + 'px';
+            btn.style.top = Math.random() * (window.innerHeight - 40) + 'px';
+        }
+
+        function finalYes() {
+            nextSlide(5);
+            startFlowerRain();
+            document.body.style.background = "#ffccd5";
+        }
+    </script>
 </body>
 </html>
